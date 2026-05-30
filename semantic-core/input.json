@@ -1,0 +1,37 @@
+{
+  "project": "Блог под курс AI-Маркетолог 2.0 (Vlad Yasko)",
+  "date": "2026-05-30",
+  "scope": "medium",
+  "target_queries_count": "100-200",
+  "languages": ["ru-RU"],
+  "languages_planned": ["uk-UA", "en-US"],
+  "regions": ["global Russian-speaking", "Ukraine", "DACH Russian-speaking"],
+  "audience": "cold — отдалённые от курса предприниматели/маркетологи/эксперты которые ищут AI-инструменты для маркетинга",
+  "goal": "органический + AI-трафик из ChatGPT/Perplexity/Gemini → курс AI-Маркетолог",
+  "content_pillars_input": [
+    "AI-Start Pack",
+    "Onboarding (экосистема Claude)",
+    "NotebookLM",
+    "Фундамент AI / Claude Code",
+    "Deep Research и стратегический анализ",
+    "Цифровые сотрудники (Скиллы, Projects)",
+    "Упаковка продукта (ДНК, Хант, Хормози)",
+    "Vibe Coding (лендинги)",
+    "Визуальный контент (VSL, ToV, 5 форматов)",
+    "Автоматизация (планируется)",
+    "Оптимизация эксперта (планируется)",
+    "Чат-боты и воронки (планируется)"
+  ],
+  "competitors_proposed": [
+    "Список уточняется — см. вопрос в чате"
+  ],
+  "tech_stack": "Next.js + Vercel",
+  "deployment": "Vercel preview domain",
+  "output_dir": "S:/Anna/AI - Маркетолог/handoffs/01-vlad-project/semantic-core/",
+  "constraints": [
+    "Без em-dash в выдаче",
+    "Без слов воронка/лиды/прогрев в публичных текстах",
+    "Без ссылок на сотрудников курса в публичных статьях",
+    "Не использовать слова гуру/коуч в контексте Vlad'а"
+  ]
+}
