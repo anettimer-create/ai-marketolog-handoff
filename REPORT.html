@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Маркетолог · GEO-стратегия и блог · Отчёт для Vlad Yasko</title>
+<style>
+  :root {
+    --bg: #000000;
+    --fg: #ffffff;
+    --accent: #F5C518;
+    --claude: #9333ea;
+    --muted: #1a1a1a;
+    --muted-fg: #a3a3a3;
+    --border: #262626;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.55;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  /* HERO */
+  .hero { margin-bottom: 80px; }
+  .badge {
+    display: inline-block;
+    border: 1px solid rgba(245, 197, 24, 0.4);
+    background: rgba(245, 197, 24, 0.1);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-size: 64px;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+  }
+  h1 .accent { color: var(--accent); }
+  .hero-sub {
+    font-size: 22px;
+    color: var(--muted-fg);
+    line-height: 1.4;
+    max-width: 680px;
+  }
+  .hero-meta {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted-fg);
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .hero-meta strong { color: var(--fg); font-weight: 600; }
+
+  /* SECTIONS */
+  section { margin-bottom: 80px; page-break-inside: avoid; }
+  .section-num {
+    color: var(--accent);
+    font-family: ui-monospace, SF Mono, Menlo, monospace;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: 44px;
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+  }
+  h2 .accent { color: var(--accent); }
+  h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 32px 0 12px;
+    letter-spacing: -0.01em;
+  }
+  p { margin-bottom: 14px; color: rgba(255,255,255,0.92); }
+  p strong { color: var(--fg); font-weight: 700; }
+
+  /* BIG STAT NUMBERS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 32px 0;
+  }
+  .stat {
+    border: 1px solid var(--border);
+    background: rgba(245, 197, 24, 0.04);
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .stat-num {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .stat-cap {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted-fg);
+  }
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .card {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .card-num {
+    color: var(--accent);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 6px;
+    color: var(--fg);
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--muted-fg);
+    line-height: 1.5;
+  }
+
+  /* PIPELINE / FLOW */
+  .flow {
+    margin: 32px 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    background: rgba(255,255,255,0.02);
+  }
+  .flow-step {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 900;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-text { font-size: 15px; line-height: 1.5; }
+  .flow-text strong { color: var(--accent); }
+
+  /* HORIZONS */
+  .horizon {
+    border-left: 3px solid var(--accent);
+    padding-left: 22px;
+    margin: 24px 0;
+  }
+  .horizon-when {
+    display: inline-block;
+    color: var(--accent);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+  .horizon-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .horizon ul { margin-left: 18px; }
+  .horizon li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  th {
+    text-align: left;
+    border-bottom: 2px solid var(--accent);
+    padding: 12px 8px;
+    color: var(--accent);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+  }
+  td {
+    padding: 14px 8px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td strong { color: var(--accent); font-weight: 800; }
+  td.win { color: var(--accent); font-weight: 800; font-size: 16px; }
+
+  /* CRITICAL BLOCK */
+  .critical {
+    border: 2px solid var(--accent);
+    background: rgba(245, 197, 24, 0.08);
+    border-radius: 14px;
+    padding: 28px;
+    margin: 32px 0;
+  }
+  .critical-label {
+    color: var(--accent);
+    font-family: ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .critical-title {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: var(--fg);
+    line-height: 1.15;
+  }
+
+  /* QUOTE */
+  .quote {
+    border-left: 3px solid var(--accent);
+    background: rgba(245, 197, 24, 0.05);
+    padding: 18px 22px;
+    margin: 28px 0;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+  .quote-author {
+    display: block;
+    font-style: normal;
+    margin-top: 10px;
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* LINKS BLOCK */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 24px 0;
+  }
+  .link {
+    display: block;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    border-radius: 10px;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--fg);
+    transition: all 0.2s;
+  }
+  .link-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .link-url {
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+    color: var(--muted-fg);
+    word-break: break-all;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 100px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted-fg);
+    font-size: 13px;
+  }
+  footer strong { color: var(--accent); font-weight: 800; }
+
+  /* PRINT */
+  @page {
+    size: A4;
+    margin: 12mm;
+    background: #000;
+  }
+  @media print {
+    body { background: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .page { padding: 0; max-width: 100%; }
+    h1 { font-size: 42px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 18px; }
+    .hero { margin-bottom: 40px; page-break-after: always; }
+    section { margin-bottom: 40px; }
+    .cards, .stats, .links { page-break-inside: avoid; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 700px) {
+    .page { padding: 32px 20px; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .hero-sub { font-size: 16px; }
+    .stats, .cards, .links { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<header class="hero">
+  <div class="badge">● Отчёт для Vlad Yasko · 30 мая 2026</div>
+  <h1>GEO-стратегия<br>и блог под курс <span class="accent">AI-Маркетолог</span></h1>
+  <p class="hero-sub">Что собрала, как это работает и пошаговый путь к моменту, когда ChatGPT в прямом эфире называет тебя экспертом по AI-маркетингу на русском.</p>
+  <div class="hero-meta">
+    <div>Автор отчёта: <strong>Anna (Anettiya)</strong></div>
+    <div>Период работы: <strong>29-30 мая 2026</strong></div>
+    <div>Финальный KPI: <strong>9-12 месяцев</strong></div>
+  </div>
+</header>
+
+<!-- BIG STATS -->
+<section>
+  <div class="section-num">Что собрала</div>
+  <h2>За 2 дня <span class="accent">собрала систему</span></h2>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">164</div>
+      <div class="stat-cap">SEO-GEO запросов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12</div>
+      <div class="stat-cap">тематических кластеров</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-cap">готовых брифов</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">9</div>
+      <div class="stat-cap">шаблонов страниц</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">8</div>
+      <div class="stat-cap">ошибок на твоём сайте</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-cap">блог задеплоен на Vercel</div>
+    </div>
+  </div>
+</section>
+
+<!-- CRITICAL -->
+<section>
+  <div class="critical">
+    <div class="critical-label">⚠ Блокер прежде всего</div>
+    <div class="critical-title">Твой сайт сейчас невидим для AI</div>
+    <p>В HTML new.aimarketolog.site стоит <code style="background:rgba(0,0,0,0.4);padding:2px 6px;border-radius:4px;color:var(--accent);font-family:monospace;">noindex</code> мета-тег (ошибка Next.js notFound в notFound()). Без фикса ни ChatGPT, ни Perplexity, ни Gemini сайт не найдут. Дополнительно нет robots.txt, sitemap.xml, llms.txt, JSON-LD Schema.</p>
+    <p style="margin-top:16px;"><strong>Готовый fix-лист с сниппетами кода: 1-2 часа работы.</strong> Файл <strong>geo-audit-aimarketolog-site.md</strong> в пакете.</p>
+  </div>
+</section>
+
+<!-- WHAT MADE -->
+<section>
+  <div class="section-num">1 · Артефакты</div>
+  <h2>Что лежит в пакете</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-num">01 · СЕМАНТИКА</div>
+      <div class="card-title">Семантическое ядро</div>
+      <div class="card-body">164 реальных поисковых запроса разбиты на 12 тематических кластеров под 9 модулей твоего курса. CSV для Excel + анализ + Hub & Spoke карта.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">02 · КОНТЕНТ</div>
+      <div class="card-title">5 готовых брифов</div>
+      <div class="card-body">Не outline, а почти готовые статьи: H2-структура, GEO-вопросы под Perplexity, ToV-маркеры, Schema, цитаты Vlad'а из транскрипций видео.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">03 · АУДИТ</div>
+      <div class="card-title">GEO-аудит твоего сайта</div>
+      <div class="card-body">8 критических ошибок с готовыми сниппетами кода. Срочно отдай разработчику. Без фикса остальная работа на 70 % впустую.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">04 · АРХИТЕКТУРА</div>
+      <div class="card-title">Спецификация блога</div>
+      <div class="card-body">4 файла: page hierarchy, шаблоны страниц, tech-GEO спека, folder structure. Next.js 16 + Tailwind v4 + Vercel.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">05 · СТРАТЕГИЯ</div>
+      <div class="card-title">GEO-доминирование 9-12 мес</div>
+      <div class="card-body">3 горизонта, конкретные шаги, метрики. Конкуренты: Одуд, Яндекс Практикум, Нетология, Skillbox. Как их обойти.</div>
+    </div>
+    <div class="card">
+      <div class="card-num">06 · КОД</div>
+      <div class="card-title">MVP блог задеплоен</div>
+      <div class="card-body">Живая ссылка + GitHub. 1 пилотная статья 2500 слов в твоём ToV. Калькулятор экономии «Раньше → Теперь» в стиле твоего лендоса.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="section-num">2 · Механика</div>
+  <h2>Как это <span class="accent">работает</span></h2>
+  <p>Блог = бэклинк-фабрика и Entity Knowledge Graph для тебя. Не классическое SEO, а строительство тебя как авторитетной сущности в AI-системах.</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-text">Холодный читатель спрашивает у ChatGPT/Perplexity: <strong>«как написать пост через AI»</strong></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-text">AI отвечает, цитируя <strong>статью из нашего блога</strong> — потому что у нас есть Schema, llms.txt, мультимодальный контент, перевёрнутая пирамида</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-text">В статье JSON-LD <strong>Person Schema = Vlad Yasko</strong> со связками на Instagram, Threads, Telegram, твой сайт</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-text">AI постепенно учится: <strong>«AI-маркетинг на русском» = Vlad Yasko</strong></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-text">В конце каждой статьи CTA → /kurs → внешняя ссылка на <strong>new.aimarketolog.site</strong></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">6</div>
+      <div class="flow-text">Через 9-12 месяцев накопленных сигналов AI <strong>называет тебя</strong> в ответ на запросы про AI-маркетинг</div>
+    </div>
+  </div>
+
+  <div class="quote">
+    Не классическое SEO, не клики. Это игра в Entity Knowledge Graph. Цель: чтобы AI знал тебя по имени.
+    <span class="quote-author">— Anna</span>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section>
+  <div class="section-num">3 · Дорожная карта</div>
+  <h2>Пошаговый путь<br>к <span class="accent">«ChatGPT цитирует»</span></h2>
+
+  <div class="horizon">
+    <div class="horizon-when">Шаг 0 · Эта неделя</div>
+    <div class="horizon-title">Срочно починить твой сайт</div>
+    <ul>
+      <li>Открыть <strong>geo-audit-aimarketolog-site.md</strong> из пакета</li>
+      <li>Убрать noindex, создать robots.txt, sitemap.xml, llms.txt</li>
+      <li>Добавить JSON-LD Course + Person + Organization + FAQPage</li>
+      <li><strong>Без этого fix остальная работа на 70 % впустую</strong></li>
+    </ul>
+  </div>
+
+  <div class="horizon">
+    <div class="horizon-when">Шаг 1 · Месяц 1 · Накопление контента</div>
+    <div class="horizon-title">Закрыть пилотные pillar-статьи</div>
+    <ul>
+      <li>4 оставшиеся статьи по готовым брифам (1-2 в неделю)</li>
+      <li>Закинуть $50 на Perplexity API для мониторинга</li>
+      <li>Создать Reddit-аккаунт vlad_yasko_ai, soft-mention в 5-10 тематических топиках</li>
+      <li><strong>Perplexity цитирует Reddit на 47 % всех ответов</strong> — это самый дешёвый канал</li>
+    </ul>
+  </div>
+
+  <div class="horizon">
+    <div class="horizon-when">Шаг 2 · Месяц 2-3 · Внешние сигналы</div>
+    <div class="horizon-title">Бэклинки и brand search</div>
+    <ul>
+      <li>Перепосты 3-5 статей на vc.ru с автором Vlad</li>
+      <li>2-3 технические статьи на Habr (vibe coding, Claude Code)</li>
+      <li>Brand-search стимул через Instagram + Telegram: «загугли Vlad Yasko AI»</li>
+      <li>Подключить мониторинг: еженедельно проверяем «Vlad в Perplexity»</li>
+      <li><strong>Цель: топ-5 ответов Perplexity по 3 brand-запросам</strong></li>
+    </ul>
+  </div>
+
+  <div class="horizon">
+    <div class="horizon-when">Шаг 3 · Месяц 4-6 · Закрепление</div>
+    <div class="horizon-title">Авторитет в нише</div>
+    <ul>
+      <li>1 интервью с известным русскоязычным маркетологом</li>
+      <li>2-3 подкаст-выступления</li>
+      <li>Гостевые посты на vc.ru/Habr с подписью «автор»</li>
+      <li><strong>Первые цитирования в ChatGPT-Search</strong></li>
+    </ul>
+  </div>
+
+  <div class="horizon">
+    <div class="horizon-when">Шаг 4 · Месяц 6-12 · Доминирование</div>
+    <div class="horizon-title">Entity Knowledge Graph</div>
+    <ul>
+      <li>Wikipedia-страница про метод (ChatGPT цитирует Wikipedia на 48 %)</li>
+      <li>Vlad как автор терминов: «3 AI-сотрудника», «vibe coding на русском»</li>
+      <li>Ежеквартальный отчёт «Состояние AI-маркетинга на русском»</li>
+      <li><strong>Момент в стриме: ChatGPT отвечает «Vlad Yasko, new.aimarketolog.site»</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- METRICS TABLE -->
+<section>
+  <div class="section-num">4 · Метрики</div>
+  <h2>Чтобы <span class="accent">понтоваться</span></h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Контрольная точка</th>
+        <th>Что проверяем</th>
+        <th>Реалистичная цифра</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Месяц 1</td>
+        <td>Citations в Perplexity по brand «Vlad Yasko AI-маркетолог»</td>
+        <td class="win">0-2</td>
+      </tr>
+      <tr>
+        <td>Месяц 3</td>
+        <td>Citations в Perplexity по 3 ключевым brand-запросам</td>
+        <td class="win">5-10</td>
+      </tr>
+      <tr>
+        <td>Месяц 6</td>
+        <td>Citations в ChatGPT-Search</td>
+        <td class="win">5-10</td>
+      </tr>
+      <tr>
+        <td>Месяц 6</td>
+        <td>Бэклинки с vc.ru / Habr</td>
+        <td class="win">10-15</td>
+      </tr>
+      <tr>
+        <td>Месяц 9</td>
+        <td>Google brand search volume «Vlad Yasko»</td>
+        <td class="win">200-500/мес</td>
+      </tr>
+      <tr>
+        <td>Месяц 9-12</td>
+        <td>«Кто эксперт по AI-маркетингу на русском?» в ChatGPT → Vlad в первой 5-ке</td>
+        <td class="win">ДА</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- LINKS -->
+<section>
+  <div class="section-num">5 · Ссылки</div>
+  <h2>Куда смотреть</h2>
+
+  <div class="links">
+    <a href="https://ai-marketolog-blog.vercel.app" class="link">
+      <div class="link-label">🌐 Живой блог</div>
+      <div class="link-url">ai-marketolog-blog.vercel.app</div>
+    </a>
+    <a href="https://github.com/anettimer-create/ai-marketolog-handoff" class="link">
+      <div class="link-label">📦 Пакет с артефактами</div>
+      <div class="link-url">github.com/anettimer-create/ai-marketolog-handoff</div>
+    </a>
+    <a href="https://github.com/anettimer-create/ai-marketolog-blog" class="link">
+      <div class="link-label">💻 Код блога</div>
+      <div class="link-url">github.com/anettimer-create/ai-marketolog-blog</div>
+    </a>
+    <a href="https://github.com/anettimer-create/ai-marketolog-handoff/blob/main/geo-audit-aimarketolog-site.md" class="link">
+      <div class="link-label">⚠ Срочно прочитать</div>
+      <div class="link-url">geo-audit-aimarketolog-site.md</div>
+    </a>
+  </div>
+
+  <h3 style="margin-top:32px;">Как развернуть у себя в Claude Code</h3>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-text"><strong>git clone</strong> https://github.com/anettimer-create/ai-marketolog-handoff</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-text">Открыть папку в Claude Code: <strong>claude .</strong> или просто запустить Claude в этой директории</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-text">Claude автоматически прочитает <strong>CLAUDE.md</strong> и поймёт контекст — спрашивай что хочешь сделать</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-text">Для запуска блога локально: <strong>git clone</strong> второй репо, <strong>npm install</strong>, <strong>npm run dev</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="critical">
+    <div class="critical-label">Следующий шаг</div>
+    <div class="critical-title">Прочитай geo-audit и почини сайт</div>
+    <p>Это 1-2 часа работы и снимает блокер. Дальше можно идти по дорожной карте. Anna готова дописать оставшиеся статьи, подключить мониторинг и провести по горизонтам — если ты согласен на формат сотрудничества (вопросы в QUESTIONS-TO-VLAD.md).</p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>AI-Маркетолог · Отчёт для Vlad Yasko</strong></p>
+  <p style="margin-top:8px;">Подготовила <strong>Anna (Anettiya)</strong> · 30 мая 2026 · MIT license</p>
+  <p style="margin-top:8px;">Связаться: Instagram @anettiya</p>
+</footer>
+
+</div>
+</body>
+</html>
